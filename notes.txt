@@ -1,6 +1,6 @@
 Program requirements:
 - grid size based on input size, but is square - return error for invalid grid (too small/not square)
-- Word lengths between 4-20 - can immediately rule out grids smaller than word size, and can ignore n-1 rows/cols for a word of length n (for optimisation)
-- Only need to check left-to-right, top-to-bottom - can use 2 methods for these. (potentially check both at once recursively? not sure if this is more efficient)
+- Word lengths between 4-20 - need checking for this? - can immediately rule out grids smaller than word size, and can ignore n-1 rows/cols for a word of length n (for optimisation)
+- Only need to check left-to-right, top-to-bottom - can use 2 methods for these. Maybe use one method to avoid repetition? Need a formula which can handle both directions (potentially check both at once recursively? not sure if this is more efficient)
 - Potential dynamic programming solution for larger numbers of words? Checking whole array each time could be slow
-
+- For testing, property testing might be good to generate large grids, but need to be aware that no errors are introduced when adding the word to the test grid
