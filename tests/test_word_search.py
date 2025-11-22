@@ -1,5 +1,10 @@
 from word_search import WordSearch
 import pytest
+import random
+
+validChars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+    'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
 
 validGrids = {"ptjwicbqn" : 3,
          "maudqrkhyectvszl": 4,
@@ -21,8 +26,11 @@ def test_reject_invalid_grids():
 def test_word_wrap():
     # The word is present in the string, but wraps around the border, so should return false
     rowWrap = ("cake", 5, "pbldoxfdcakemcntudywjskop")
+    colWrap = ("bowl", 5, "dblicuqwoxsbbaslodgadwjfg")
     ws = WordSearch(rowWrap[2])
-    assert ws.is_present_horizontally(rowWrap[0]) == False
+    assert ws.is_present(rowWrap[0]) == False
+    ws = WordSearch(colWrap[2])
+    assert ws.is_present(colWrap[0]) == False
 
 def test_horizontal_valid_word():
     validHWordGrids = [("cake", 5, "pbldoxcakemcntudywjskopsd"), # Word at end of row
@@ -32,3 +40,21 @@ def test_horizontal_valid_word():
     for group in validHWordGrids:
         ws = WordSearch(group[2])
         assert ws.is_present(group[0]) == True
+
+def test_vertical_valid_word():
+    validVWordGrids = [("light", 8, "nailndubuitiyiusgiugdbnfkzbhmvjqsrgtofhsdhfohsadlkfbklabsdkbnxic")]
+    for group in validVWordGrids:
+        ws = WordSearch(group[2])
+        assert ws.is_present(group[0]) == True
+
+
+def test_large_grid():
+    word = "abcdefgh"
+    grid = ""
+    for i in range(10000):
+        grid += random.choice(validChars)
+    grid = grid[:-len(word)] + word 
+    
+    ws = WordSearch(grid)
+    for i in range(10000):
+        assert ws.is_present(word) == True

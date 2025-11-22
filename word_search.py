@@ -66,4 +66,3 @@ class WordSearch:
                     wordPos = 1
 
         return False
-

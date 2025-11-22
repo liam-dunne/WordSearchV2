@@ -1,0 +1,13 @@
+Partition input space:
+- Short words ~ 4-10 letters
+- Long words ~ 10-20 letters
+- Grids which contain words horizontally
+- Grids which contain words vertically
+- Grids which don't contain words
+- Grids which contain the word but it wraps around the edge of the grid
+
+Edge Cases:
+- Empty grid
+- Non-square grid
+- Grid which is smaller than the word
+- "Words" with invalid characters? - instructions specify lowercase a-z only
