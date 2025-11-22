@@ -31,4 +31,4 @@ def test_horizontal_valid_word():
                 ]
     for group in validHWordGrids:
         ws = WordSearch(group[2])
-        assert ws.is_present_horizontally(group[0]) == True
+        assert ws.is_present(group[0]) == True

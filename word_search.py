@@ -22,37 +22,48 @@ class WordSearch:
         else:
             return -1
 
-    def is_present(self, word: str) -> bool:
-        return True
+
     
-    def is_present_horizontally(self, word: str) -> bool:
-        """Checks each character row by row for a match with given word using two pointers to track position in word and grid.
+    def is_present(self, word: str) -> bool:
+        return (self.check_direction(word, "horizontal") or  self.check_direction(word, "vertical"))
+    
+    def check_direction(self, word: str, direction: str) -> bool:
+        """Checks each character column by column for a match with given word using two pointers to track position in word and grid.
             Worst case O(n^2) time.
         
             Returns:
-                bool: True if word present in grid, False otherwise
+                bool: True if word present top-to-bottom in grid, False otherwise
             """
+        
         if self.gridSize < len(word):
             return False
 
         grid = self.grid
-        rowLen = self.gridSize
+        size = self.gridSize
         wordPos = 0 # Pointer to current position in word
 
-        for i in range(len(grid)):
-            # Reset wordPos at start of new row
-            if i % rowLen == 0:
-                wordPos = 0
-            # Move to start of next row when no room left in current row for word
-            elif (rowLen - (i%rowLen)) < len(word) and wordPos == 0:
-                i = (i//rowLen) * (rowLen+1)
+        # Ensure squares counted in correct order
+        if direction == "horizontal":
+            rowMult = 1
+            colMult = size
+        elif direction == "vertical":
+            rowMult = size
+            colMult = 1
 
-            if grid[i] == word[wordPos]:
-                wordPos += 1
-                if wordPos == len(word):
-                    return True
-            elif grid[i] == word[0]:
-                wordPos = 1
+        for i in range(size):
+            # Reset wordPos at start of new column
+            wordPos = 0
+            for j in range(size):
+                # Move to start of next column when no room left in current column for word
+                if size-j < len(word) and wordPos == 0:
+                    break
+
+                if grid[colMult*i + rowMult*j] == word[wordPos]:
+                    wordPos += 1
+                    if wordPos == len(word):
+                        return True
+                elif grid[colMult*i + rowMult*j] == word[0]:
+                    wordPos = 1
 
         return False
-    
+
