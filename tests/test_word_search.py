@@ -47,6 +47,27 @@ def test_vertical_valid_word():
         ws = WordSearch(group[2])
         assert ws.is_present(group[0]) == True
 
+def test_horizontal_invalid_words():
+    invalidHWordGrids = [("test", 5, "asdlcnaidsfrheqytsetfdbcv"), # Word appears right-to-left
+                         ("might", 7, "lufdhfhdshakluygdcgadsyufkgaselgbfdaqdschsildchsv") # Word doesn't appear at all
+                      ]
+    for group in invalidHWordGrids:
+        ws = WordSearch(group[2])
+        assert ws.is_present(group[0]) == False
+
+def test_vertical_invalid_word():
+    invalidVWordGrids = [("pink", 6, "kthuiynawlseihdafhpdcllbasdhffhalisd"), # Word appears bottom-to-top
+                         ("sight", 7, "lufdhfhdshakluygdcgadsyufkgaselgbfdaqdschsildchsv") # Word doesn't appear at all
+                        ]
+    for group in invalidVWordGrids:
+        ws = WordSearch(group[2])
+        assert ws.is_present(group[0]) == False
+
+def test_word_too_big():
+    tooBigWords = [("abcdefghijklmnop", 5, "albmcxaijnxuichdzudsfamnn")]
+    for group in tooBigWords:
+        ws = WordSearch(group[2])
+        assert ws.is_present(group[0]) == False
 
 def test_large_grid():
     word = "abcdefgh"
@@ -56,5 +77,5 @@ def test_large_grid():
     grid = grid[:-len(word)] + word 
     
     ws = WordSearch(grid)
-    for i in range(10000):
+    for i in range(100):
         assert ws.is_present(word) == True

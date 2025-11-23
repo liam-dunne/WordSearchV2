@@ -25,8 +25,8 @@ class WordSearch:
 
     
     def is_present(self, word: str) -> bool:
-        return (self.check_direction(word, "horizontal") or  self.check_direction(word, "vertical"))
-    
+        return (self.check_direction(word, "horizontal") or self.check_direction(word, "vertical"))
+
     def check_direction(self, word: str, direction: str) -> bool:
         """Checks each character column by column for a match with given word using two pointers to track position in word and grid.
             Worst case O(n^2) time.
@@ -54,10 +54,10 @@ class WordSearch:
             # Reset wordPos at start of new column
             wordPos = 0
             for j in range(size):
-                # Move to start of next column when no room left in current column for word
+                # Skip row/column when insufficient room for word
                 if size-j < len(word) and wordPos == 0:
                     break
-
+  
                 if grid[colMult*i + rowMult*j] == word[wordPos]:
                     wordPos += 1
                     if wordPos == len(word):

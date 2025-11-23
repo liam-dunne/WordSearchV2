@@ -4,3 +4,8 @@ Program requirements:
 - Only need to check left-to-right, top-to-bottom - can use 2 methods for these. Maybe use one method to avoid repetition? Need a formula which can handle both directions (potentially check both at once recursively? not sure if this is more efficient)
 - Potential dynamic programming solution for larger numbers of words? Checking whole array each time could be slow
 - For testing, property testing might be good to generate large grids, but need to be aware that no errors are introduced when adding the word to the test grid
+
+
+Note:
+- After trying a recursive implementation, noticed that my initial solution performed better on average for single words as it avoids repeated checks when 
+  several characters match but not a whole word. However, it's worth comparing the implementation for large numbers of different words.
