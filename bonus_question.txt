@@ -1,0 +1,4 @@
+Since my algorithm checks row-by-row and column-by-column, different cores could be used to check different rows or columns simultaneously to improve performance.
+Alternatively, each core could search for a different word simultaneously.
+If the cores are searching for the same word, once one core finds the word, all cores need to stop searching for that word and move to the next.
+If the cores are searching for different words, then only the core that finds the word needs to stop and move on to the next word that isn't being searched for.
