@@ -9,3 +9,6 @@ Program requirements:
 Note:
 - After trying a recursive implementation, noticed that my initial solution performed better on average for single words as it avoids repeated checks when 
   several characters match but not a whole word. However, it's worth comparing the implementation for large numbers of different words.
+
+- Only tested edge cases, missed basic tests
+- Tested edge cases for horizontal but not vertical, should make this consistent

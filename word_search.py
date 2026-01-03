@@ -32,7 +32,7 @@ class WordSearch:
             Worst case O(n^2) time.
         
             Returns:
-                bool: True if word present top-to-bottom in grid, False otherwise
+                bool: True if word present in grid for given direction, False otherwise
             """
         
         if self.gridSize < len(word):
@@ -44,25 +44,25 @@ class WordSearch:
 
         # Ensure squares counted in correct order
         if direction == "horizontal":
-            rowMult = 1
-            colMult = size
+            inLineStep = 1
+            lineStep = size
         elif direction == "vertical":
-            rowMult = size
-            colMult = 1
+            inLineStep = size
+            lineStep = 1
 
         for i in range(size):
-            # Reset wordPos at start of new column
+            # Reset wordPos at start of new line to prevent word wrapping around
             wordPos = 0
             for j in range(size):
-                # Skip row/column when insufficient room for word
+                # Skip line when insufficient room for word
                 if size-j < len(word) and wordPos == 0:
                     break
   
-                if grid[colMult*i + rowMult*j] == word[wordPos]:
+                if grid[lineStep*i + inLineStep*j] == word[wordPos]:
                     wordPos += 1
                     if wordPos == len(word):
                         return True
-                elif grid[colMult*i + rowMult*j] == word[0]:
+                elif grid[lineStep*i + inLineStep*j] == word[0]:
                     wordPos = 1
 
         return False
